@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function MobileCart({ onCheckout }) {
   return (
-    <main className="max-w-lg mx-auto bg-[#fcfbf9] min-h-screen p-4 sm:p-6 font-sans text-[#113224]">
+    <main className="page-wrapper bg-[#fcfbf9] min-h-screen font-sans text-[#113224]">
       
       {/* Header */}
       <div className="flex justify-between items-end border-b border-gray-200 pb-4 mb-6 mt-4 sm:mt-8">
@@ -24,6 +24,8 @@ export default function MobileCart({ onCheckout }) {
                 alt="Couples pottery" 
                 width={112}
                 height={112}
+                priority
+                unoptimized
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -79,10 +81,11 @@ export default function MobileCart({ onCheckout }) {
             {/* Thumbnail */}
             <div className="w-24 h-24 sm:w-28 sm:h-28 bg-gray-200 rounded-sm shrink-0 overflow-hidden">
               <Image 
-                src="/images/banner/cart-page.png" 
+                src="/images/banner/image-4.png" 
                 alt="Beginners pottery" 
                 width={112}
                 height={112}
+                unoptimized
                 className="w-full h-full object-cover"
               />
             </div>
@@ -121,17 +124,14 @@ export default function MobileCart({ onCheckout }) {
         {/* Payment Methods */}
         <div className="text-center pb-8">
           <p className="text-xs text-gray-500 mb-3 uppercase tracking-wide font-medium">Secure payments provided by</p>
-          <div className="flex justify-center items-center gap-2">
-            {/* Visual placeholders for payment icons - replace with actual SVGs or Next/Image later */}
-            <div className="w-10 h-6 bg-[#006fcf] rounded flex items-center justify-center text-[7px] text-white font-bold">AMEX</div>
-            <div className="w-10 h-6 bg-[#e55c20] rounded flex items-center justify-center text-[7px] text-white font-bold">DISC</div>
-            <div className="w-10 h-6 bg-[#1a1f71] rounded flex items-center justify-center text-[9px] text-white font-bold italic">VISA</div>
-            <div className="w-10 h-6 bg-gray-800 rounded flex items-center justify-center">
-               <div className="flex -space-x-1.5">
-                  <div className="w-3.5 h-3.5 rounded-full bg-red-500 mix-blend-multiply"></div>
-                  <div className="w-3.5 h-3.5 rounded-full bg-yellow-500 mix-blend-multiply"></div>
-               </div>
-            </div>
+          <div className="flex justify-center gap-2">
+            <Image 
+              src="/images/icons/card.png" 
+              alt="Payment Cards" 
+              width={200} 
+              height={30}
+              unoptimized
+            />
           </div>
         </div>
       </div>

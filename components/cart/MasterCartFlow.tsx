@@ -29,7 +29,7 @@ export default function MasterCartFlow() {
         {/* Left Side: Product Image/Video Context */}
         <div className="w-full lg:w-1/2 h-[40vh] lg:h-screen relative bg-gray-200 hidden md:block">
           <img 
-            src="/api/placeholder/1000/1000" 
+            src="/images/banner/cart-page.png" 
             alt="Pottery making" 
             className="w-full h-full object-cover"
           />
