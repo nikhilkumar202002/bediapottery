@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { ParentNote } from '@/constants/birthdayData'
+import { ParentNote, parentNotes } from '@/constants/birthdayData'
 import { Title, Content } from '@/components/ui'
 
 /**
@@ -28,13 +28,13 @@ const ParentNoteCard: React.FC<ParentNoteCardProps> = ({ note }) => {
  * Dependency Inversion: Accepts notes as props
  */
 interface ParentNotesSectionProps {
-  notes: ParentNote[]
+  notes?: ParentNote[]
   title?: string
   subtitle?: string
 }
 
 const ParentNotesSection: React.FC<ParentNotesSectionProps> = ({
-  notes,
+  notes = parentNotes,
   title = 'Important Notes for Parents',
   subtitle = 'Please read these important guidelines to prepare for the party',
 }) => {

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { PricingTier } from '@/constants/birthdayData'
+import { PricingTier, pricingTiers } from '@/constants/birthdayData'
 import { Title, Content, PrimaryButton } from '@/components/ui'
 
 /**
@@ -79,7 +79,7 @@ const PricingTierCard: React.FC<PricingTierCardProps> = ({
  * Dependency Inversion: Accepts pricing tiers as props
  */
 interface PricingSectionProps {
-  pricingTiers: PricingTier[]
+  pricingTiers?: PricingTier[]
   title?: string
   subtitle?: string
   onSelectTier?: (tierId: string) => void
@@ -87,7 +87,7 @@ interface PricingSectionProps {
 }
 
 const PricingSection: React.FC<PricingSectionProps> = ({
-  pricingTiers,
+  pricingTiers: tiers = pricingTiers,
   title = 'Birthday Party Pricing',
   subtitle = 'Choose the perfect package for your celebration',
   onSelectTier,
@@ -105,7 +105,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {pricingTiers.map((tier) => (
+          {tiers.map((tier) => (
             <PricingTierCard
               key={tier.id}
               tier={tier}

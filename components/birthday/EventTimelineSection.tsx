@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { EventStep } from '@/constants/birthdayData'
+import { EventStep, eventTimeline } from '@/constants/birthdayData'
 import { Title, Content } from '@/components/ui'
 
 /**
@@ -43,13 +43,13 @@ const EventTimelineStep: React.FC<EventTimelineStepProps> = ({ step, isLast }) =
  * Dependency Inversion: Accepts steps as props, no direct data coupling
  */
 interface EventTimelineSectionProps {
-  steps: EventStep[]
+  steps?: EventStep[]
   title?: string
   subtitle?: string
 }
 
 const EventTimelineSection: React.FC<EventTimelineSectionProps> = ({
-  steps,
+  steps = eventTimeline,
   title = 'Birthday Party Timeline',
   subtitle = 'Here\'s how your celebration will unfold',
 }) => {
