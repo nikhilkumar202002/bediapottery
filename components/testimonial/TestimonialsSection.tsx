@@ -7,7 +7,7 @@ import TestimonialsSlider from "./TestimonialsSlider";
 export default function TestimonialsSection() {
   return (
     <section className="py-32 bg-white">
-      <div className="page-wrapper">
+      <div className="page-wrapper px-[17px] lg:px-0">
         <TestimonialsHeader />
         <TestimonialsSlider />
       </div>

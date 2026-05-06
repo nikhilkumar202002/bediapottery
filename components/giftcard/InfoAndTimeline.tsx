@@ -112,7 +112,7 @@ export default function InfoAndTimeline() {
       {/* Central Video for Mobile */}
       <div className="w-[240px] h-[240px] rounded-full overflow-hidden shadow-lg border-[4px] border-[#f2ece3] mb-4">
       <video 
-        src="/videos/pottery-demo.mp4" 
+        src="/video/bowl.mp4" 
         className="w-full h-full object-cover" 
         autoPlay 
         loop 
