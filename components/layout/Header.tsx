@@ -1,62 +1,119 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Link from 'next/link'
-import IconButton from '@/components/ui/IconButton'
 import { navigationItems } from '@/constants/data'
 import Image from 'next/image'
 import { Content } from '../ui'
 import SearchPill from '../header/SearchPill'
+import { ChevronDown, Menu, X } from 'lucide-react'
 
 const Header: React.FC = () => {
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+
+  const toggleDropdown = (href: string) => {
+    setOpenDropdown((prev) => (prev === href ? null : href))
+  }
+
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
-      <nav className="page-wrapper py-[7px]">
+      <nav className="page-wrapper py-[7px] px-[17px] lg:px-0">
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <Link href="/">
-           <Image src="/logo.svg" alt="Bedia Pottery Logo" width={290} height={31} className='w-[290px] h-[31px]' />
+            <Image src="/logo.svg" alt="Bedia Pottery Logo" width={290} height={31} className='w-[180px] h-auto md:w-[290px] md:h-[31px]' />
           </Link>
-          
-          <div className="flex items-center 2xl:gap-[50px] xl:gap-6">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className=""
-              >
-                  <Content className=" hover:text-primary transition-colors duration-200"> {item.label}</Content>
-               
-              </Link>
-            ))}
-            
-            {/* <div className="flex items-center gap-2">
-              <IconButton
-                icon={
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                }
-                ariaLabel="Search"
-              />
-              <IconButton
-                icon={
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                }
-                ariaLabel="Account"
-              />
-              <IconButton
-                icon={
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                  </svg>
-                }
-                ariaLabel="Menu"
-              />
-            </div> */}
-          <SearchPill />
+
+          {/* Desktop nav */}
+          <div className="hidden lg:flex items-center 2xl:gap-[50px] xl:gap-6">
+            {navigationItems.map((item) =>
+              item.children ? (
+                <div key={item.href} className="relative group">
+                  <Link href={item.href} className="flex items-center gap-1">
+                    <Content className="hover:text-primary transition-colors duration-200">
+                      {item.label}
+                    </Content>
+                    <ChevronDown className="w-3 h-3 text-gray-500 group-hover:text-primary transition-colors duration-200" />
+                  </Link>
+                  <div className="absolute left-0 top-full mt-2 w-44 bg-white border border-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block px-4 py-2.5 text-sm hover:bg-gray-50 hover:text-primary transition-colors duration-150"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link key={item.href} href={item.href}>
+                  <Content className="hover:text-primary transition-colors duration-200">{item.label}</Content>
+                </Link>
+              )
+            )}
+            <SearchPill />
+          </div>
+
+          {/* Mobile right side: SearchPill icons + hamburger */}
+          <div className="flex lg:hidden items-center gap-3">
+            <SearchPill />
+            <button
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              onClick={() => setMobileOpen((prev) => !prev)}
+              className="p-1 text-gray-700 hover:text-primary transition-colors duration-200"
+            >
+              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="lg:hidden bg-white border-t border-gray-100 px-[17px] pb-4">
+          {navigationItems.map((item) =>
+            item.children ? (
+              <div key={item.href}>
+                <button
+                  onClick={() => toggleDropdown(item.href)}
+                  className="flex items-center justify-between w-full py-3 border-b border-gray-100"
+                >
+                  <span className="text-sm font-medium text-gray-800">{item.label}</span>
+                  <ChevronDown
+                    className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${openDropdown === item.href ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {openDropdown === item.href && (
+                  <div className="pl-4 pb-1">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="block py-2.5 text-sm text-gray-600 hover:text-primary transition-colors duration-150"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center py-3 border-b border-gray-100 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-200"
+              >
+                {item.label}
+              </Link>
+            )
+          )}
+        </div>
+      )}
     </header>
   )
 }

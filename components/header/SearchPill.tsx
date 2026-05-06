@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function SearchPill() {
   return (
-    <div className="flex items-center 2xl:gap-[45px] xl:gap-4 bg-primary rounded-full px-[23px] py-[17px]">
+    <div className="flex items-center gap-3 xl:gap-4 2xl:gap-[45px] bg-primary rounded-full px-3 py-2 lg:px-[23px] lg:py-[17px]">
       {/* Cart Icon */}
       <Link href="/cart">
         <button
@@ -17,6 +17,7 @@ export default function SearchPill() {
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4 lg:w-6 lg:h-6"
           >
             <path
               d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z"
@@ -53,6 +54,7 @@ export default function SearchPill() {
           viewBox="0 0 24 26"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className="w-4 h-4 lg:w-5 lg:h-[22px]"
         >
           <path
             d="M11.6377 0.866211C14.8732 0.86644 17.5215 3.51543 17.5215 6.75098C17.5213 9.98636 14.8731 12.6345 11.6377 12.6348C8.40219 12.6348 5.75313 9.9865 5.75293 6.75098C5.75293 3.51528 8.40202 0.866211 11.6377 0.866211Z"

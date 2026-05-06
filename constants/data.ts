@@ -8,7 +8,15 @@ import {
   GoogleReview,
 } from "@/types";
 export const navigationItems: NavigationItem[] = [
-  { label: "Bedia Pottery", href: "/" },
+  {
+    label: "Bedia Pottery",
+    href: "/workshops",
+    children: [
+      { label: "Adults", href: "/workshops/adults-pottery-wheel" },
+      { label: "Kids", href: "/workshops/kids-birthday" },
+      { label: "Gift Cards", href: "/workshops/gift-cards" },
+    ],
+  },
   { label: "Birthday Parties", href: "/birthday" },
   { label: "Bedia Privé", href: "/prive" },
 ];
