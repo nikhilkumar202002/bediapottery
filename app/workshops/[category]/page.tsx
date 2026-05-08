@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCard from "@/components/product/ProductCard";
-import { workshopData } from "@/constants/workshops";
+import { workshopData, workshopCategorySlugs } from "@/constants/workshops";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Content, Title } from "@/components/ui";
@@ -14,11 +14,7 @@ interface PageProps {
 
 /* Static params (for static generation) */
 export async function generateStaticParams() {
-  return [
-    {
-      category: workshopData.category.slug,
-    },
-  ];
+  return workshopCategorySlugs.map((slug) => ({ category: slug }));
 }
 
 /* SEO metadata */
@@ -27,17 +23,25 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const category = workshopData.category;
 
-  if (params.category !== category.slug) {
+  if (!workshopCategorySlugs.includes(params.category)) {
     return {
       title: "Category Not Found",
     };
   }
 
+  if (params.category === category.slug) {
+    return {
+      title: `${category.title} - Bedia Pottery`,
+      description:
+        category.description || `Explore ${category.title} workshops at Bedia Pottery`,
+    };
+  }
+
+  // Generic metadata for other known slugs
+  const humanTitle = params.category.replace(/-/g, " ");
   return {
-    title: `${category.title} - Bedia Pottery`,
-    description:
-      category.description ||
-      `Explore ${category.title} workshops at Bedia Pottery`,
+    title: `${humanTitle} - Bedia Pottery`,
+    description: `Explore ${humanTitle} workshops at Bedia Pottery`,
   };
 }
 
@@ -45,7 +49,7 @@ export default function CategoryPage({ params }: PageProps) {
   const category = workshopData.category;
 
   /* Check category exists */
-  if (params.category !== category.slug) {
+  if (!workshopCategorySlugs.includes(params.category)) {
     notFound();
   }
 

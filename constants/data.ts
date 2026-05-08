@@ -9,16 +9,20 @@ import {
 } from "@/types";
 export const navigationItems: NavigationItem[] = [
   {
-    label: "Bedia Pottery",
+    label: "Pottery Workshops",
     href: "/workshops",
     children: [
-      { label: "Adults", href: "/workshops/adults-pottery-wheel" },
-      { label: "Kids", href: "/workshops/kids-birthday" },
+      { label: "Adults Workshop", href: "/workshops/adults-pottery-wheel" },
+      { label: "Kids Workshop", href: "/workshops/kids-workshop" },
+      { label: "Kids Birthday Party", href: "/workshops/kids-birthday" },
+      { label: "Adults Birthday Party", href: "/workshops/adults-birthday" },
       { label: "Gift Cards", href: "/workshops/gift-cards" },
+      { label: "Corporate Events", href: "/workshops/corporate-events" },
+      { label: "School Field Trips", href: "/workshops/school-field-trips" },
     ],
   },
-  { label: "Birthday Parties", href: "/birthday" },
-  { label: "Bedia Privé", href: "/prive" },
+  // { label: "Birthday Parties", href: "/birthday" },
+  { label: "Bedia Privé", href: "https://bediaprive.com" },
 ];
 
 export const contentCards: ContentCard[] = [
